@@ -1,0 +1,142 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OR Atelier</title><style>
+*{box-sizing:border-box}body{margin:0;background:#0e1116;color:#f5f6f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:3;padding:17px;background:#151a21ee;border-bottom:1px solid #303742}h1{font-size:22px;margin:0}header small,.note{color:#9faab7}
+main{max-width:650px;margin:auto;padding:15px 15px 90px}.card{background:#171c23;border:1px solid #2d3540;border-radius:17px;padding:15px;margin-bottom:14px}
+h2{font-size:17px;margin:0 0 12px}label{display:block;color:#b9c3ce;font-size:13px;margin:11px 0 5px}input,select,textarea{width:100%;padding:13px;font-size:16px;border-radius:11px;border:1px solid #3b4552;background:#10151b;color:white}
+textarea{min-height:85px}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.hidden{display:none!important}.organ{padding:11px 0;border-bottom:1px solid #303844}
+.toggle{display:flex;align-items:center;gap:9px;color:white;font-size:17px;font-weight:700;margin:0}.toggle input{width:23px;height:23px}.details{padding:5px 0 3px 32px}.filters{margin-top:14px}.sub{padding-left:32px}
+button{width:100%;padding:14px;border:0;border-radius:13px;font-size:16px;font-weight:700;background:#f1b928;color:#111;margin-top:10px}.secondary{background:#2b3440;color:white}
+.extra{padding:12px;border:1px solid #36404c;border-radius:13px;margin:10px 0;background:#11161c}.ok{background:#15351f;color:#bff3ca;padding:12px;border-radius:11px;margin-top:10px}.note{font-size:12px}
+#report{line-height:1.45}#report h3{margin:16px 0 5px;font-size:16px}#report p{margin:4px 0}#report .rline{padding:5px 0;border-bottom:1px solid #303844}
+@media print{body{background:white;color:black}header,form,#printReport,.note{display:none!important}main{max-width:none;padding:0}.card{border:0;background:white;color:black}#reportCard{display:block!important}#report .rline{border-bottom:1px solid #ddd}}
+</style></head><body><header><h1>🔧 OR Atelier</h1><small>Mécanique agricole / JCB</small></header><main><form id="form">
+<section class="card"><h2>1. Machine</h2><label>Client / chantier</label><input name="client"><label>Marque / modèle</label><input name="machine" placeholder="Ex. JCB 531-70">
+<div class="row"><div><label>N° série</label><input name="serie"></div><div><label>Heures machine</label><input name="heures" inputmode="decimal"></div></div><label>Photo compteur</label><input type="file" accept="image/*" capture="environment"></section>
+<section class="card"><h2>2. Intervention</h2><label>Type d'intervention</label><select id="type" name="type"><option value="">Choisir…</option><option value="vidange">Vidange / entretien</option><option value="reparation">Réparation mécanique</option><option value="pneus">Pneumatiques</option><option value="autre">Autre</option></select></section>
+<section id="vidange" class="card hidden"><h2>Vidange / entretien</h2><p class="note">Coche uniquement les organes concernés.</p><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="moteur"> Moteur</label>
+<div id="moteur" class="details hidden">
+<label>Huile / fluide</label><select name="moteur_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="moteur_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="moteur_ref"></div></div>
+<div class="filters"><b>Filtres moteur</b>
+<label class="toggle"><input type="checkbox" class="subcheck" data-target="fh"> Filtre à huile</label>
+<div id="fh" class="sub hidden"><label>Référence</label><select name="fh_ref"><option value="">Références à ajouter…</option></select></div><label class="toggle"><input type="checkbox" class="subcheck" data-target="fg1"> Filtre à gasoil primaire</label>
+<div id="fg1" class="sub hidden"><label>Référence</label><select name="fg1_ref"><option value="">Références à ajouter…</option></select></div><label class="toggle"><input type="checkbox" class="subcheck" data-target="fg2"> Filtre à gasoil secondaire</label>
+<div id="fg2" class="sub hidden"><label>Référence</label><select name="fg2_ref"><option value="">Références à ajouter…</option></select></div><label class="toggle"><input type="checkbox" class="subcheck" data-target="fa1"> Pré-filtre à air</label>
+<div id="fa1" class="sub hidden"><label>Référence</label><select name="fa1_ref"><option value="">Références à ajouter…</option></select></div><label class="toggle"><input type="checkbox" class="subcheck" data-target="fa2"> Filtre à air</label>
+<div id="fa2" class="sub hidden"><label>Référence</label><select name="fa2_ref"><option value="">Références à ajouter…</option></select></div></div>
+</div></div><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="boite"> Boîte de vitesses</label>
+<div id="boite" class="details hidden">
+<label>Huile / fluide</label><select name="boite_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="boite_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="boite_ref"></div></div>
+
+</div></div><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="pont_av"> Pont avant</label>
+<div id="pont_av" class="details hidden">
+<label>Huile / fluide</label><select name="pont_av_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="pont_av_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="pont_av_ref"></div></div>
+
+</div></div><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="pont_ar"> Pont arrière</label>
+<div id="pont_ar" class="details hidden">
+<label>Huile / fluide</label><select name="pont_ar_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="pont_ar_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="pont_ar_ref"></div></div>
+
+</div></div><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="hydraulique"> Hydraulique</label>
+<div id="hydraulique" class="details hidden">
+<label>Huile / fluide</label><select name="hydraulique_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="hydraulique_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="hydraulique_ref"></div></div>
+
+</div></div><div class="organ">
+<label class="toggle"><input type="checkbox" class="organcheck" data-target="reducteurs"> Réducteurs</label>
+<div id="reducteurs" class="details hidden">
+<label>Huile / fluide</label><select name="reducteurs_huile"><option value="">Choisir…</option><option>10w40</option><option>15w40</option><option>10w30 JCB</option><option>80/90</option><option>T3000</option><option>Gear oil plus JCB</option><option>HV46</option><option>Hydrolique JCB</option><option>Liquide de refroidissement</option><option>10W</option><option>Auto 15</option></select>
+<div class="row"><div><label>Quantité (L)</label><input name="reducteurs_qte" inputmode="decimal"></div><div><label>Référence filtre / pièce</label><input name="reducteurs_ref"></div></div>
+
+</div></div><label>Photos références / filtres</label><input type="file" accept="image/*" multiple capture="environment"></section>
+<section id="pneus" class="card hidden"><h2>Pneumatiques</h2><label>Opération</label><select><option>Réparation crevaison</option><option>Remplacement pneu</option><option>Valve</option><option>Gonflage</option><option>Permutation</option></select><label>Dimension / référence</label><input></section>
+<section id="rep" class="card hidden"><h2>Détail de l'intervention</h2><label>Symptôme / panne</label><textarea></textarea><label>Travaux effectués</label><textarea></textarea><label>Référence pièce</label><input><label>Photos</label><input type="file" accept="image/*" multiple></section>
+<section class="card"><h2>3. Autres travaux sur la machine</h2><p class="note">Ex. remplacement d'une vitre en plus d'une vidange.</p><div id="extras"></div><button type="button" class="secondary" id="add">+ Ajouter un autre travail</button></section>
+<section class="card"><h2>4. Fin de l'OR</h2><div class="row"><div><label>Temps passé</label><input name="temps"></div><div><label>Déplacement (km)</label><input name="km"></div></div><label>Observations</label><textarea name="obs"></textarea><label>Intervention terminée ?</label><select><option>Oui</option><option>Non</option></select><button type="submit">Valider et créer le rapport</button><button type="button" class="secondary" id="reset">Nouvel OR</button><div id="saved" class="ok hidden">✓ Rapport créé ci-dessous.</div></section>
+</form>
+<section id="reportCard" class="card hidden">
+<h2>📄 Rapport d’intervention</h2>
+<div id="report"></div>
+<button type="button" id="printReport">Ouvrir le rapport à imprimer / PDF</button>
+<p class="note">Sur iPhone : dans l’écran d’impression, agrandis l’aperçu avec deux doigts puis utilise Partager pour l’envoyer ou l’enregistrer en PDF.</p>
+</section>
+</main>
+<script>
+var type=document.getElementById('type'),vid=document.getElementById('vidange'),pneus=document.getElementById('pneus'),rep=document.getElementById('rep');
+function show(){var v=type.value;vid.classList.toggle('hidden',v!=='vidange');pneus.classList.toggle('hidden',v!=='pneus');rep.classList.toggle('hidden',!(v==='reparation'||v==='autre'));}
+type.onchange=show;
+document.querySelectorAll('.organcheck').forEach(function(c){c.onchange=function(){document.getElementById(c.dataset.target).classList.toggle('hidden',!c.checked);}});
+document.querySelectorAll('.subcheck').forEach(function(c){c.onchange=function(){document.getElementById(c.dataset.target).classList.toggle('hidden',!c.checked);}});
+var n=0;document.getElementById('add').onclick=function(){n++;var d=document.createElement('div');d.className='extra';d.innerHTML='<b>Travail supplémentaire '+n+'</b><label>Type de travail</label><select><option>Réparation mécanique</option><option>Vitre / carrosserie</option><option>Flexible</option><option>Électricité</option><option>Pneumatique</option><option>Autre</option></select><label>Travail effectué</label><textarea></textarea><div class="row"><div><label>Référence pièce</label><input></div><div><label>Quantité</label><input></div></div><label>Photo</label><input type="file" accept="image/*" multiple><button type="button" class="secondary del">Supprimer</button>';d.querySelector('.del').onclick=function(){d.remove()};document.getElementById('extras').appendChild(d);};
+document.getElementById('form').onsubmit=function(e){
+e.preventDefault();
+function val(sel){var x=document.querySelector(sel);return x&&x.value?x.value.trim():'';}
+function esc(x){return String(x||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var r=[];
+r.push('<p><b>Date :</b> '+new Date().toLocaleDateString('fr-FR')+'</p>');
+if(val('[name="client"]'))r.push('<p><b>Client / chantier :</b> '+esc(val('[name="client"]'))+'</p>');
+if(val('[name="machine"]'))r.push('<p><b>Machine :</b> '+esc(val('[name="machine"]'))+'</p>');
+if(val('[name="serie"]'))r.push('<p><b>N° série :</b> '+esc(val('[name="serie"]'))+'</p>');
+if(val('[name="heures"]'))r.push('<p><b>Heures machine :</b> '+esc(val('[name="heures"]'))+'</p>');
+
+if(type.value==='vidange'){
+ r.push('<h3>Vidange / entretien</h3>');
+ document.querySelectorAll('.organcheck:checked').forEach(function(c){
+   var id=c.dataset.target, box=document.getElementById(id), title=c.parentElement.textContent.trim();
+   var huile=box.querySelector('select[name$="_huile"]'), qte=box.querySelector('input[name$="_qte"]'), ref=box.querySelector('input[name$="_ref"]');
+   var line='<b>'+esc(title)+'</b>';
+   if(huile&&huile.value) line+=' — '+esc(huile.value);
+   if(qte&&qte.value) line+=' — '+esc(qte.value)+' L';
+   if(ref&&ref.value) line+=' — Réf. '+esc(ref.value);
+   r.push('<div class="rline">'+line+'</div>');
+   box.querySelectorAll('.subcheck:checked').forEach(function(fc){
+     var fb=document.getElementById(fc.dataset.target), fs=fb.querySelector('select');
+     r.push('<div class="rline">↳ '+esc(fc.parentElement.textContent.trim())+(fs&&fs.value?' — Réf. '+esc(fs.value):'')+'</div>');
+   });
+ });
+}
+if(type.value==='pneus') r.push('<h3>Pneumatiques</h3><p>Intervention pneumatique renseignée dans l’OR.</p>');
+if(type.value==='reparation'||type.value==='autre') r.push('<h3>Intervention principale</h3><p>Réparation / autre intervention renseignée dans l’OR.</p>');
+
+var extras=document.querySelectorAll('#extras .extra');
+if(extras.length){r.push('<h3>Autres travaux</h3>');extras.forEach(function(x,i){
+ var sels=x.querySelectorAll('select'), tas=x.querySelectorAll('textarea'), ins=x.querySelectorAll('input:not([type="file"])');
+ var line='<b>Travail '+(i+1)+'</b>';
+ if(sels[0]&&sels[0].value)line+=' — '+esc(sels[0].value);
+ if(tas[0]&&tas[0].value)line+='<br>'+esc(tas[0].value);
+ if(ins[0]&&ins[0].value)line+='<br>Réf. '+esc(ins[0].value);
+ if(ins[1]&&ins[1].value)line+=' — Qté '+esc(ins[1].value);
+ r.push('<div class="rline">'+line+'</div>');
+});}
+r.push('<h3>Fin d’intervention</h3>');
+if(val('[name="temps"]'))r.push('<p><b>Temps passé :</b> '+esc(val('[name="temps"]'))+'</p>');
+if(val('[name="km"]'))r.push('<p><b>Déplacement :</b> '+esc(val('[name="km"]'))+' km</p>');
+if(val('[name="obs"]'))r.push('<p><b>Observations :</b> '+esc(val('[name="obs"]'))+'</p>');
+document.getElementById('report').innerHTML=r.join('');
+document.getElementById('reportCard').classList.remove('hidden');
+document.getElementById('saved').classList.remove('hidden');
+document.getElementById('reportCard').scrollIntoView({behavior:'smooth'});
+};
+document.getElementById('printReport').onclick=function(){
+  var report=document.getElementById('report').innerHTML;
+  var page='<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rapport intervention</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;padding:24px;color:#111;background:#fff}h1{font-size:22px}h3{margin-top:20px}.rline{padding:7px 0;border-bottom:1px solid #ddd}p{margin:6px 0}button{width:100%;padding:14px;font-size:17px;font-weight:700;margin-bottom:20px}@media print{button{display:none}}</style></head><body><button onclick="window.print()">Imprimer / enregistrer en PDF</button><h1>Rapport d’intervention</h1>'+report+'</body></html>';
+  var w=window.open('','_blank');
+  if(w){w.document.open();w.document.write(page);w.document.close();}
+  else{
+    var blob=new Blob([page],{type:'text/html;charset=utf-8'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='Rapport_intervention.html';a.click();
+    setTimeout(function(){URL.revokeObjectURL(url)},1000);
+  }
+};
+document.getElementById('reset').onclick=function(){document.getElementById('form').reset();document.getElementById('extras').innerHTML='';document.getElementById('reportCard').classList.add('hidden');document.getElementById('report').innerHTML='';document.querySelectorAll('.details,.sub').forEach(function(x){x.classList.add('hidden')});show();};
+show();
+</script></body></html>
